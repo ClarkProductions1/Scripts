@@ -33,3 +33,5 @@ RegisterKeyMapping('handsup', 'Hands Up', 'keyboard', 'F4')
 RegisterCommand('handsup', function()
     toggleHandsUp()
 end, false)
+
+-- Clark Productions --
