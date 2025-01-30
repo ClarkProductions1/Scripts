@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loading - Signal 15 Roleplay</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: url('background.jpg') no-repeat center center/cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+        .logo {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 150px;
+        }
+        .server-name {
+            font-size: 2.5em;
+            color: white;
+            margin-bottom: 20px;
+        }
+        .loading-bar-container {
+            width: 80%;
+            max-width: 600px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .loading-bar {
+            height: 100%;
+            width: 0;
+            background: blue;
+            transition: width 0.5s;
+        }
+        .volume-control {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="loading-screen">
+        <img src="logo.png" alt="Server Logo" class="logo">
+        <h1 class="server-name">PUT SERVER NAME HERE</h1>
+        <div class="loading-bar-container">
+            <div class="loading-bar" id="loading-bar"></div>
+        </div>
+    </div>
+    <audio id="loading-music" autoplay loop>
+        <source src="music.mp3" type="audio/mpeg">
+        Your browser does not support the audio tag.
+    </audio>
+    <div class="volume-control">
+        <label for="volume">Volume: </label>
+        <input type="range" id="volume" min="0" max="1" step="0.1" value="0.5">
+    </div>
+    <script>
+        let progress = 0;
+        function updateLoadingBar() {
+            progress += 25;
+            if (progress > 100) progress = 0;
+            const bar = document.getElementById("loading-bar");
+            bar.style.width = `${progress}%`;
+            if (progress <= 25) {
+                bar.style.background = "blue";
+            } else if (progress <= 50) {
+                bar.style.background = "red";
+            } else if (progress <= 75) {
+                bar.style.background = "white";
+            } else {
+                bar.style.background = "blue";
+            }
+        }
+        setInterval(updateLoadingBar, 1000);
+        
+        // Music volume control
+        document.addEventListener("DOMContentLoaded", function () {
+            let music = document.getElementById("loading-music");
+            let volumeControl = document.getElementById("volume");
+            music.volume = 0.5;
+            volumeControl.addEventListener("input", function () {
+                music.volume = this.value;
+            });
+        });
+    </script>
+</body>
+</html>
